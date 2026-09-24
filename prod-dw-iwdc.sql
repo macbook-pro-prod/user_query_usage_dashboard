@@ -106,12 +106,10 @@ SELECT
 
 FROM `prod-dw-iwdc.region-asia-southeast1.INFORMATION_SCHEMA.JOBS_BY_PROJECT` -- change to certain project to backfilling
 
-WHERE total_bytes_processed <> 0
-  AND state = 'DONE'
-
-  AND DATE(creation_time, 'Asia/Kuala_Lumpur')
-    BETWEEN DATE_SUB(CURRENT_DATE('Asia/Kuala_Lumpur'), INTERVAL 175 DAY)
-        AND DATE_SUB(CURRENT_DATE('Asia/Kuala_Lumpur'), INTERVAL 1 DAY)
+    WHERE parent_job_id IS NOT NULL
+      AND DATE(creation_time, 'Asia/Kuala_Lumpur')
+        BETWEEN DATE_SUB(CURRENT_DATE('Asia/Kuala_Lumpur'), INTERVAL 175 DAY)
+            AND DATE_SUB(CURRENT_DATE('Asia/Kuala_Lumpur'), INTERVAL 1 DAY)
 
   AND job_id NOT IN (
     SELECT parent_job_id
