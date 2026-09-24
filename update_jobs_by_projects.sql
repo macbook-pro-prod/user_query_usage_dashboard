@@ -8,3 +8,8 @@ WHERE EXISTS (
   WHERE l.key = 'ca-bq-job'
     AND l.value = 'true'
 );
+
+
+
+
+jobs_by_project
